@@ -1,12 +1,13 @@
 """Mqtt subscriber implementation for specified settings"""
 from paho.mqtt import client as mqtt_client
+from gpiozero import OutputDevice
+
 from mqtt.communication_settings import CommunicationSettings
 from mqtt.configuration import Configuration
-from gpiozero import OutputDevice
 
 from utils.logger import Logger
 
-
+# pylint: disable=W0601, C0103
 class MqttSubscriber:
     """Mqtt subscriber implementation"""
     def __init__(self, yaml: dict):
@@ -53,19 +54,19 @@ class MqttSubscriber:
 
     # pylint: disable=W0613
     @staticmethod
-    def on_connect(client, userdata, flags, rc):
+    def on_connect(client, userdata, flags, r_c):
         """On connect event for mqtt subscriber"""
-        if rc == 0:
+        if r_c == 0:
             Logger.get_logger().info("Connected to MQTT Broker!")
         else:
-            Logger.get_logger().info("Failed to connect, return code %d\n", rc)
+            Logger.get_logger().info("Failed to connect, return code %d\n", r_c)
 
     @staticmethod
     def on_message(client, userdata, msg):
         """On received message event function"""
         received = bool(msg.payload.decode())
         Logger.get_logger().info("Received %s from %s topic", msg.payload.decode(), msg.topic)
-        
+
         if received:
             output.on()
         else:
