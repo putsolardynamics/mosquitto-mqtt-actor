@@ -1,4 +1,4 @@
-"""Definition of communication settings for """
+"""Definition of communication settings for MQTT"""
 
 
 class CommunicationSettings:

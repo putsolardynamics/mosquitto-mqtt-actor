@@ -1,6 +1,8 @@
 """Mqtt subscriber implementation for specified settings"""
 from paho.mqtt import client as mqtt_client
 from mqtt.communication_settings import CommunicationSettings
+from mqtt.configuration import Configuration
+from gpiozero import OutputDevice
 
 from utils.logger import Logger
 
@@ -12,6 +14,10 @@ class MqttSubscriber:
         @param: yaml parameter file as parsed dictionary
         """
         self.communication_settings = CommunicationSettings(yaml[CommunicationSettings.section_key()])
+        self.configuration = Configuration(yaml[Configuration.section_key()])
+        global output
+        output = OutputDevice(self.configuration.output_pin)
+        output.off()
 
     def connect_mqtt(self) -> mqtt_client:
         """Connect to mqtt client function"""
@@ -57,4 +63,10 @@ class MqttSubscriber:
     @staticmethod
     def on_message(client, userdata, msg):
         """On received message event function"""
+        received = bool(msg.payload.decode())
         Logger.get_logger().info("Received %s from %s topic", msg.payload.decode(), msg.topic)
+        
+        if received:
+            output.on()
+        else:
+            output.off()

@@ -6,11 +6,9 @@ from utils.logger import Logger
 from mqtt.mqtt_subscriber import MqttSubscriber
 
 
-
 def main(args):
     """Main executable script"""
     config = YamlParser.load_config(args.config)
-
     Logger.logging_setup('mqtt_subscriber.log')
 
     mqtt_subscriber = MqttSubscriber(config)
