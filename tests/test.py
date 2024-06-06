@@ -6,6 +6,9 @@ import unittest
 import doctest
 from pathlib import Path
 
+os.chdir("src")
+
+# pylint: disable=C0413
 from utils.yaml_parser import YamlParser
 from mqtt.communication_settings import CommunicationSettings
 
