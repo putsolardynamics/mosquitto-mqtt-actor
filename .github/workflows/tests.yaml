@@ -22,4 +22,4 @@ jobs:
     - name: Run unit tests
       run: |
         cd src
-        bash templates/tests.sh.template
+        bash ../templates/tests.sh.template
