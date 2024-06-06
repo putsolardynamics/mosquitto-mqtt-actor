@@ -9,8 +9,10 @@ from pathlib import Path
 
 sys.path.append("src")  # Add source dependencies to path
 
+
 # pylint: disable=C0413
-from utils.helpers import load_config
+from utils.yaml_parser import YamlParser
+from mqtt.communication_settings import CommunicationSettings
 
 
 # pylint: disable=C0103, W0107, W0613, W0221, C2801
@@ -61,9 +63,12 @@ class TestName(unittest.TestCase):
         """Run test for config file"""
         root_dir = Path(os.getcwd())
         config_path = root_dir / Path("templates/config.yaml.template")
-        config = load_config(config_path)
+        config = YamlParser.load_config(config_path)[CommunicationSettings.section_key()]
         self.assertIsNotNone(config)
-        self.assertEqual(config['PARAM'], "f2137b")
+        self.assertEqual(config[CommunicationSettings.broker_key()], "localhost")
+        self.assertEqual(config[CommunicationSettings.port_key()], 1883)
+        self.assertEqual(config[CommunicationSettings.topic_key()], "human-detected")
+        self.assertEqual(config[CommunicationSettings.client_id_key()], 2)
 
 
 if __name__.__contains__("__main__"):
