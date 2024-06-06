@@ -1,12 +1,14 @@
 """Unit tests for train submodules"""
 
 import os
+import sys
 
 import unittest
 import doctest
 from pathlib import Path
 
-os.chdir("src")
+sys.path.append("src")  # Add source dependencies to path
+
 
 # pylint: disable=C0413
 from utils.yaml_parser import YamlParser
