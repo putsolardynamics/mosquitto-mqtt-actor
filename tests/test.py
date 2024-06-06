@@ -62,7 +62,7 @@ class TestName(unittest.TestCase):
     def test_config_file(self):
         """Run test for config file"""
         root_dir = Path(os.getcwd())
-        config_path = root_dir / Path("../templates/config.yaml.template")
+        config_path = root_dir / Path("templates/config.yaml.template")
         config = YamlParser.load_config(config_path)[CommunicationSettings.section_key()]
         self.assertIsNotNone(config)
         self.assertEqual(config[CommunicationSettings.broker_key()], "localhost")
