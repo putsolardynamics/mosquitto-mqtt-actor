@@ -1,2 +1,5 @@
-config:
-  PARAM: "f2137b"
+communication:
+  broker: "localhost"
+  port: 1883
+  topic: "human-detected"
+  clientId: 2

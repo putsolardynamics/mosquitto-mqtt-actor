@@ -1,9 +1,9 @@
-# Python project template
+# Mosquitto mqtt actor
 
 ## Config
 Using template files provided and changing data to corresponding data you can use repository.
 
-`train.py` takes one argument of name config which is yaml file which template is placed in templates directory.
+`main.py` takes one argument of name config which is yaml file which template is placed in templates directory.
 
 ## Using config file
 Copy config file to main directory:
@@ -20,3 +20,10 @@ bash pylint.sh
 ```
 
 Either way add pylint to IDE or editor to work with project without failing on push.
+
+## Test received frames
+
+To test received frames use command from mosquitto clients library (example, adjust to configuration):
+```bash
+ mosquitto_pub -t "human-detected" -h "localhost" -m "True"
+```
