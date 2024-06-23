@@ -27,3 +27,9 @@ To test received frames use command from mosquitto clients library (example, adj
 ```bash
  mosquitto_pub -t "human-detected" -h "localhost" -m "True"
 ```
+
+## GPIO Zero
+To install library on raspberry pi use:
+```bash
+sudo apt install python3-gpiozero
+```
